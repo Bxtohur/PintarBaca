@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "956086301937",
+    "project_id": "pintar-baca",
+    "storage_bucket": "pintar-baca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956086301937:android:0a73c70ea05090d5c32550",
+        "android_client_info": {
+          "package_name": "com.bitohur.pintarbaca"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-M_2z7gysaBI351G2fWY2XDZ1WatJ7v0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PintarBaca" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="colorPrimary">@color/primary</item>
+    </style>
+
+    <style name="Theme.PintarBaca" parent="Base.Theme.PintarBaca" />
+
+    <style name="toast">
+        <item name="stStrokeColor">@color/primary</item>
+        <item name="stStrokeWidth">5dp</item>
+        <item name="stTextColor">@color/primary</item>
+        <item name="stColorBackground">#fff</item>
+        <item name="stRadius">50dp</item>
+    </style>
+
+</resources>

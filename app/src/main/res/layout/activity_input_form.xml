@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".InputFormActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Input Data Buku"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/border"
+            android:drawableLeft="@color/white"
+            android:drawablePadding="10dp"
+            android:hint="Judul Buku"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_header" />
+
+        <EditText
+            android:id="@+id/et_book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/border"
+            android:drawableLeft="@color/white"
+            android:drawablePadding="10dp"
+            android:hint="Penulis Buku"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/et_book_title" />
+
+        <EditText
+            android:id="@+id/et_book_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/border"
+            android:drawableLeft="@color/white"
+            android:drawablePadding="10dp"
+            android:hint="Halaman Buku"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/et_book_author" />
+
+        <EditText
+            android:id="@+id/et_book_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/border"
+            android:drawableLeft="@color/white"
+            android:drawablePadding="10dp"
+            android:hint="Rating Buku"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/et_book_page" />
+        <EditText
+            android:id="@+id/et_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/border"
+            android:drawableLeft="@color/white"
+            android:drawablePadding="10dp"
+            android:hint="Link Lokasi Pembelian"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/et_book_rating" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_upload_img"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintTop_toBottomOf="@id/et_location">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border" />
+
+            <ImageView
+                android:id="@+id/iv_image_upload"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_image" />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/border"
+            android:drawableLeft="@color/white"
+            android:drawablePadding="10dp"
+            android:gravity="start"
+            android:hint="Deskripsi buku"
+            android:inputType="textMultiLine"
+            android:minHeight="200dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/cv_upload_img" />
+
+        <Button
+            android:id="@+id/bt_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Simpan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_description" />
+
+        <Button
+            android:id="@+id/bt_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Tampilkan"
+            app:layout_constraintStart_toEndOf="@id/bt_save"
+            app:layout_constraintTop_toBottomOf="@id/et_description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
