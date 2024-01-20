@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bitohur.pintarbaca.model.Model;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +49,7 @@ import io.github.muddz.styleabletoast.StyleableToast;
 
 public class InputFormActivity extends AppCompatActivity {
     private EditText etTitle, etAuthor, etPage, etRating, etDescription, etLocation;
-    private Button btSave, btShow;
+    private Button btSave;
     private CardView selectPhoto;
     private ImageView ivUploadImage;
     private Uri imageUri;
@@ -79,7 +80,6 @@ public class InputFormActivity extends AppCompatActivity {
         etRating = findViewById(R.id.et_book_rating);
         etLocation = findViewById(R.id.et_location);
         btSave = findViewById(R.id.bt_save);
-        btShow = findViewById(R.id.bt_show);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -99,7 +99,7 @@ public class InputFormActivity extends AppCompatActivity {
             etPage.setText(pPage);
             etRating.setText(pRating);
             etLocation.setText(pLocation);
-            Picasso.get().load(pImageUrl).into(ivUploadImage);
+            Glide.with(this).load(pImageUrl).into(ivUploadImage);
             etDescription.setText(pDescription);
         } else {
             btSave.setText("Save");
@@ -116,28 +116,28 @@ public class InputFormActivity extends AppCompatActivity {
                     String rating = etRating.getText().toString().trim();
                     String location = etLocation.getText().toString().trim();
                     String description = etDescription.getText().toString().trim();
-                    String imageUrl = photoUrl;
 
-                    updateData(id, title, author, page, description, rating, location, imageUrl);
+                    updateData(id, title, author, page, description, rating, location);
+
+                    intentToMainActivity();
                 } else {
                     uploadBookInfo();
+                    intentToMainActivity();
                 }
+            }
+        });
 
-            }
-        });
-        btShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(InputFormActivity.this, MainActivity.class));
-                finish();
-            }
-        });
         selectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pickImageFromGallery();
             }
         });
+    }
+
+    private void intentToMainActivity(){
+        startActivity(new Intent(InputFormActivity.this, MainActivity.class));
+        finish();
     }
 
     private void pickImageFromGallery() {
@@ -169,8 +169,8 @@ public class InputFormActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             if (uri != null) {
-                                String photoUrl = uri.toString();
-                                bookData.put("url", photoUrl);
+                                photoUrl = uri.toString();
+                                bookData.put("imageUrl", photoUrl);
                                 saveBookToFirestore(bookData, bookId);
                             }
                         }
@@ -187,13 +187,15 @@ public class InputFormActivity extends AppCompatActivity {
                     StyleableToast.makeText(InputFormActivity.this, "Gagal mengunggah gambar.", R.style.toast).show();
                 }
             });
+        } else {
+            StyleableToast.makeText(this, "Tidak Ada gambar yang dipilih", R.style.toast);
+            saveBookToFirestore(bookData, bookId);
         }
     }
 
     private void saveBookToFirestore(Map<String, Object> bookData, String bookId) {
-        // Simpan data buku ke Firestore
         firestore.collection("Documents").document(bookId)
-                .set(bookData, SetOptions.merge()) // Gunakan SetOptions.merge() agar tidak mengganti data yang sudah ada
+                .set(bookData, SetOptions.merge())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -207,10 +209,10 @@ public class InputFormActivity extends AppCompatActivity {
                 });
     }
 
-    private void updateData(String id, String title, String author, String page, String description, String rating, String location, String imageUrl) {
+    private void updateData(String id, String title, String author, String page, String description, String rating, String location) {
 
         firestore.collection("Documents").document(id)
-                .update("title", title, "description", description, "author", author, "page", page, "rating", rating, "location", location, "imageUrl", imageUrl)
+                .update("title", title, "description", description, "author", author, "page", page, "rating", rating, "location", location)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -19,6 +19,7 @@ import com.bitohur.pintarbaca.InputFormActivity;
 import com.bitohur.pintarbaca.MainActivity;
 import com.bitohur.pintarbaca.R;
 import com.bitohur.pintarbaca.model.Model;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -89,8 +90,8 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         holder.tvAuthor.setText(modelList.get(position).getAuthor());
         holder.tvPage.setText(modelList.get(position).getPage() + " Halaman");
         holder.tvRating.setText("Rating " + modelList.get(position).getRating());
-        String imageUrl = "https://penerbitdeepublish.com/wp-content/uploads/2017/05/ONU6OU0-e1548298130744.jpg";
-        Picasso.get().load(imageUrl).into(holder.ivBook);
+        String imageUrl = modelList.get(position).getImageUrl();
+        Glide.with(listActivity).load(imageUrl).into(holder.ivBook);
     }
 
     @Override
